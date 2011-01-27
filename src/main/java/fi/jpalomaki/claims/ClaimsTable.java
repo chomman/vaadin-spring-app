@@ -10,12 +10,12 @@ import fi.jpalomaki.claims.Claim.Type;
  * 
  * @author jpalomaki
  */
-public final class ClaimTable extends Table {
+public final class ClaimsTable extends Table {
     
     private static final long serialVersionUID = 1L;
     private static final Action DELETE = new Action("Delete");
     
-    public ClaimTable() {
+    public ClaimsTable() {
         super();
         setupTable();
         addContextMenu();

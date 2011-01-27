@@ -12,7 +12,7 @@ public final class ClaimsApp extends Application {
 
     private static final long serialVersionUID = 1L;
     
-    private final ClaimTable table = new ClaimTable();
+    private final ClaimsTable table = new ClaimsTable();
     
     /**
      * {@inheritDoc}
@@ -35,7 +35,7 @@ public final class ClaimsApp extends Application {
         return window;
     }
     
-    ClaimTable getTable() {
+    ClaimsTable getTable() {
         return table;
     }
 }
