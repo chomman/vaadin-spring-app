@@ -12,7 +12,7 @@
     
     <!-- Scan for and configure components -->
     
-    <context:component-scan base-package="fi.jpalomaki.vaadinspring" />
+    <context:component-scan base-package="fi.jpalomaki.claims" />
 
     <!-- Setup a datasource for JDBC connectivity -->
 

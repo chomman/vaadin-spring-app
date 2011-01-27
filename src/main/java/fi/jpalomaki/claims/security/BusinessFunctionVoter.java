@@ -1,4 +1,4 @@
-package fi.jpalomaki.vaadinspring.app.security;
+package fi.jpalomaki.claims.security;
 
 import java.util.Collection;
 import org.springframework.security.core.Authentication;

@@ -1,4 +1,4 @@
-package fi.jpalomaki.vaadinspring.app.persistence;
+package fi.jpalomaki.claims.persistence;
 
 import java.util.*;
 import javax.persistence.*;

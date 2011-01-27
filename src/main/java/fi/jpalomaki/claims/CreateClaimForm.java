@@ -1,41 +1,40 @@
-package fi.jpalomaki.vaadinspring.app;
+package fi.jpalomaki.claims;
 
-import java.math.BigDecimal;
+import com.vaadin.ui.*;
 import java.util.Arrays;
-import com.vaadin.addon.beanvalidation.BeanValidationForm;
+import java.math.BigDecimal;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.DefaultFieldFactory;
-import com.vaadin.ui.Field;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.BaseTheme;
-import fi.jpalomaki.vaadinspring.app.Claim.Type;
+import fi.jpalomaki.claims.Claim.Type;
+import com.vaadin.addon.beanvalidation.BeanValidationForm;
 
 /**
- * CreateClaimForm.
+ * Form for {@link Claim} creation.
  *
  * @author jpalomaki
  */
 @SuppressWarnings({ "serial", "unchecked" })
-public final class CreateClaimForm extends BeanValidationForm<Claim> implements Component {
+public final class CreateClaimForm extends BeanValidationForm<Claim> {
     
     private final Claim claim;
-    private final ClaimTable table;
     
-    public CreateClaimForm(ClaimTable table) {
+    public CreateClaimForm() {
         super(Claim.class);
+        this.claim = Claim.of(Type.LEGITIMATE, "", "", new BigDecimal("0.0"));
+        setupTable();
+        addButtons();
+    }
+    
+    private void setupTable() {
         setImmediate(true);
-        this.claim = Claim.of(Type.LEGITIMATE, "", "", new BigDecimal("0"));
-        this.table = table;
         setItemDataSource(new BeanItem<Claim>(claim));
         setFormFieldFactory(new ClaimFieldFactory());
         setVisibleItemProperties(Arrays.asList(new String[] {"type", "summary", "description", "amount"}));
+    }
+    
+    private void addButtons() {
         HorizontalLayout buttons = new HorizontalLayout();
         buttons.setSpacing(true);
         Button reset = new Button("Reset", new Button.ClickListener() {
@@ -50,7 +49,7 @@ public final class CreateClaimForm extends BeanValidationForm<Claim> implements 
                 try {
                     commit();
                     claim.persist();
-                    CreateClaimForm.this.table.add(claim);
+                    ((ClaimsApp)getApplication()).getTable().add(claim);
                     Window main = getApplication().getMainWindow();
                     main.removeWindow((Window)getParent().getParent());
                 } catch (Exception e) {

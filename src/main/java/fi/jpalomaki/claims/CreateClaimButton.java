@@ -1,25 +1,17 @@
-package fi.jpalomaki.vaadinspring.app;
+package fi.jpalomaki.claims;
 
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.*;
 
 /**
- * Button for creating a new {@link Claim}.
+ * Button for triggering {@link Claim} creation.
  *
- * @author jpalomak
+ * @author jpalomaki
  */
-@SuppressWarnings({"unchecked", "serial"})
-public final class CreateClaimButton extends Button implements Component {    
+@SuppressWarnings("serial")
+public final class CreateClaimButton extends Button {    
     
-    private final Window parent;
-    private final ClaimTable table;
-    
-    public CreateClaimButton(Window parent, ClaimTable table) {
+    public CreateClaimButton() {
         super();
-        this.parent = parent;
-        this.table = table;
         setCaption("Create");
         addClickListener();
     }
@@ -28,6 +20,7 @@ public final class CreateClaimButton extends Button implements Component {
         addListener(new ClickListener() {  
             @Override
             public void buttonClick(ClickEvent event) {
+                Window parent = getApplication().getMainWindow();
                 parent.addWindow(newCreateFormWindow());
             }
         });
@@ -37,7 +30,7 @@ public final class CreateClaimButton extends Button implements Component {
         Window window = new Window();
         window.setModal(true);
         window.setCaption("Create new claim");
-        window.addComponent(new CreateClaimForm(table));
+        window.addComponent(new CreateClaimForm());
         VerticalLayout layout = (VerticalLayout)window.getContent();
         layout.setMargin(true);
         layout.setSpacing(true);

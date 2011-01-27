@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
     
-    <display-name>vaadin-spring-app</display-name>
+    <display-name>Claims</display-name>
     
     <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>vaadin-spring-app.root</param-value>
+        <param-value>claims.root</param-value>
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -31,7 +31,7 @@
         <servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class>
         <init-param>
             <param-name>application</param-name>
-            <param-value>fi.jpalomaki.vaadinspring.app.EntryPoint</param-value>
+            <param-value>fi.jpalomaki.claims.ClaimsApp</param-value>
         </init-param>
     </servlet>
     

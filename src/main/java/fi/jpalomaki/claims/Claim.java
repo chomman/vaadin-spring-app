@@ -1,19 +1,17 @@
-package fi.jpalomaki.vaadinspring.app;
+package fi.jpalomaki.claims;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-import fi.jpalomaki.vaadinspring.app.persistence.DomainObject;
+import fi.jpalomaki.claims.persistence.DomainObject;
 
 /**
  * Abstraction for a generic claim.
  *
- * @author jpalomak
+ * @author jpalomaki
  */
 @Entity
 public final class Claim extends DomainObject {
@@ -64,6 +62,9 @@ public final class Claim extends DomainObject {
         this.amount = amount;
     }
     
+    /**
+     * Create a new {@link Claim} with the given information.
+     */
     public static Claim of(Type type, String summary, String description, BigDecimal amount) {
         Claim claim = new Claim();
         claim.type = type;
@@ -73,6 +74,9 @@ public final class Claim extends DomainObject {
         return claim;
     }
     
+    /**
+     * Find all {@link Claim}s.
+     */
     public static List<Claim> findAll() {
         return entityManager().createQuery("FROM Claim", Claim.class).getResultList();
     }

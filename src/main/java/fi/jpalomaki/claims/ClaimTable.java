@@ -1,14 +1,14 @@
-package fi.jpalomaki.vaadinspring.app;
+package fi.jpalomaki.claims;
 
 import com.vaadin.ui.Table;
 import java.math.BigDecimal;
 import com.vaadin.event.Action;
-import fi.jpalomaki.vaadinspring.app.Claim.Type;
+import fi.jpalomaki.claims.Claim.Type;
 
 /**
  * Table for listing {@link Claim}s.
  * 
- * @author jpalomak
+ * @author jpalomaki
  */
 public final class ClaimTable extends Table {
     

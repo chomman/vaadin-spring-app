@@ -37,7 +37,7 @@
             <list>   
                 <bean class="org.springframework.security.access.vote.RoleVoter" />
                 <bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
-                <bean class="fi.jpalomaki.vaadinspring.app.security.BusinessFunctionVoter" /> 
+                <bean class="fi.jpalomaki.claims.security.BusinessFunctionVoter" /> 
             </list> 
         </property> 
     </bean>
@@ -53,8 +53,8 @@
     <bean
         id="digestAuthenticationEntryPoint"
         class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint"
-        p:realmName="vaadin-spring-app"
         p:nonceValiditySeconds="120"
+        p:realmName="Claims"
         p:key="acegi"
     />
 
