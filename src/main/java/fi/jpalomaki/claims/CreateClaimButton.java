@@ -29,6 +29,7 @@ public final class CreateClaimButton extends Button {
     private Window newCreateFormWindow() {
         Window window = new Window();
         window.setModal(true);
+        window.setResizable(false);
         window.setCaption("Create new claim");
         window.addComponent(new CreateClaimForm());
         VerticalLayout layout = (VerticalLayout)window.getContent();
