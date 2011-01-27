@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sec="http://www.springframework.org/schema/security" xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.4.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <!-- Enable @Secured -->
+    
+    <sec:global-method-security
+        mode="aspectj"
+        secured-annotations="enabled"
+        access-decision-manager-ref="accessDecisionManager"
+    />
+    
+    <!-- Provide user credentials (stored in-memory) -->
+    
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider> 
+            <sec:password-encoder hash="plaintext" />
+            <sec:user-service id="inMemoryUserDetailsService">
+                <sec:user name="user" password="s3cr3t" authorities="ROLE_USER,BF_BRICK_READ" />
+            </sec:user-service>
+        </sec:authentication-provider> 
+    </sec:authentication-manager>
+    
+    <!-- Setup HTTP security with digest authentication -->
+    
+    <sec:http entry-point-ref="digestAuthenticationEntryPoint" access-decision-manager-ref="accessDecisionManager">
+        <sec:intercept-url pattern="/**" access="ROLE_USER" />
+        <sec:custom-filter ref="digestAuthenticationFilter" position="BASIC_AUTH_FILTER" />
+    </sec:http>
+    
+    <!-- Provide an access decision manager that handles both ROLE_ and BF_ prefixed authorities -->
+    
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased"> 
+        <property name="decisionVoters"> 
+            <list>   
+                <bean class="org.springframework.security.access.vote.RoleVoter" />
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+                <bean class="fi.jpalomaki.vaadinspring.app.security.BusinessFunctionVoter" /> 
+            </list> 
+        </property> 
+    </bean>
+    
+    <!-- Setup HTTP digest filter and the associated entry point -->
+    
+    <bean
+        id="digestAuthenticationFilter"
+        class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter"
+        p:authenticationEntryPoint-ref="digestAuthenticationEntryPoint"
+        p:userDetailsService-ref="inMemoryUserDetailsService"
+    />
+    <bean
+        id="digestAuthenticationEntryPoint"
+        class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint"
+        p:realmName="vaadin-spring-app"
+        p:nonceValiditySeconds="120"
+        p:key="acegi"
+    />
+
+</beans>
