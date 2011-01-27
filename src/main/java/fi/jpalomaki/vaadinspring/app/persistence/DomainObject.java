@@ -1,6 +1,6 @@
 package fi.jpalomaki.vaadinspring.app.persistence;
 
-import java.util.Date;
+import java.util.*;
 import javax.persistence.*;
 import org.apache.commons.lang.builder.*;
 import org.springframework.transaction.annotation.Transactional;
@@ -115,7 +115,7 @@ public abstract class DomainObject {
     public void flush() {
         this.entityManager.flush();
     }
-
+    
     /**
      * {@inheritDoc}
      */

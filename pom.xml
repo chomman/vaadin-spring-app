@@ -22,6 +22,10 @@
 
     <repositories>
         <repository>
+            <id>Vaadin-addons</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+        <repository>
             <id>JBoss</id>
             <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
         </repository>
@@ -71,6 +75,12 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
             <version>6.4.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin.addon</groupId>
+            <artifactId>beanvalidation-addon</artifactId>
+            <version>0.6.1</version>
             <scope>compile</scope>
         </dependency>
 

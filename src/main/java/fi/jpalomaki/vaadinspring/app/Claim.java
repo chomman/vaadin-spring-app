@@ -1,9 +1,13 @@
 package fi.jpalomaki.vaadinspring.app;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import fi.jpalomaki.vaadinspring.app.persistence.DomainObject;
 
 /**
@@ -13,11 +17,19 @@ import fi.jpalomaki.vaadinspring.app.persistence.DomainObject;
  */
 @Entity
 public final class Claim extends DomainObject {
-
+    
+    @NotNull
     @Enumerated
     private Type type;
+    
+    @NotNull
     private String summary;
+    
+    @NotNull
     private String description;
+    
+    @NotNull
+    @DecimalMin("0")
     private BigDecimal amount;
 
     public Type getType() {
@@ -69,6 +81,11 @@ public final class Claim extends DomainObject {
      * Abstraction for claim type.
      */
     public static enum Type {
+        
         FRAUD, LEGITIMATE;
+        
+        public static Collection<Type> collection() {
+            return Arrays.asList(values());
+        }
     }
 }
