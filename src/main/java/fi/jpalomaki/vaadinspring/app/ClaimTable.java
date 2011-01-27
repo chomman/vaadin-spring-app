@@ -10,12 +10,11 @@ import fi.jpalomaki.vaadinspring.app.Claim.Type;
  * @author jpalomak
  */
 @SuppressWarnings("serial")
-public final class ClaimList extends Table {
+public final class ClaimTable extends Table {
         
-   public ClaimList() {
+   public ClaimTable() {
        super();
        setPageLength(10);
-       setCaption("Claims");
        addContainerProperty("Type", Type.class, null);
        addContainerProperty("Summary", String.class, null);
        addContainerProperty("Description", String.class, null);
