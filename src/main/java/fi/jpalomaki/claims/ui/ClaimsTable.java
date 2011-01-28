@@ -38,6 +38,7 @@ public final class ClaimsTable extends Table {
         setPageLength(10);
         setSelectable(true);
         setMultiSelect(true);
+        setWidth("75%");
         addContainerProperty("Id", Long.class, null);
         addContainerProperty("Version", Long.class, null);
         addContainerProperty("Type", Type.class, null);
