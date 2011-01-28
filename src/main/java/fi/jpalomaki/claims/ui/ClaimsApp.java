@@ -1,10 +1,10 @@
-package fi.jpalomaki.claims;
+package fi.jpalomaki.claims.ui;
 
 import com.vaadin.ui.*;
 import com.vaadin.Application;
 
 /**
- * Entry point to the Claims app.
+ * Entry point to the claims application.
  * 
  * @author jpalomaki
  */
@@ -35,6 +35,9 @@ public final class ClaimsApp extends Application {
         return window;
     }
     
+    /**
+     * Get the table that lists claims.
+     */
     ClaimsTable getTable() {
         return table;
     }

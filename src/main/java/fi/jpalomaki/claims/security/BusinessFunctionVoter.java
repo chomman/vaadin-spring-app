@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
+import static fi.jpalomaki.claims.security.BusinessFunctions.BF_AUTHORITY_PREFIX;
 
 /**
  * An {@link AccessDecisionVoter} implementation that votes YES if a user has a
@@ -16,14 +17,12 @@ import org.springframework.security.access.ConfigAttribute;
  */
 public final class BusinessFunctionVoter implements AccessDecisionVoter {
     
-    private static final String BUSINESS_FUNCTION_PREFIX = "BF_";
-    
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean supports(ConfigAttribute attribute) {
-        return attribute.getAttribute() != null && attribute.getAttribute().startsWith(BUSINESS_FUNCTION_PREFIX);
+        return attribute.getAttribute() != null && attribute.getAttribute().startsWith(BF_AUTHORITY_PREFIX);
     }
 
     /**

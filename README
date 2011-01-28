@@ -1,4 +1,11 @@
 
 Claims (sample Vaadin-Spring web application)
 
+    - Vaadin-powered UI
+    - Spring-powered backend
+    - Spring security with HTTP digest auth
+    - Active record -style data access with JPA 2
+    - AspectJ ITDs and compile-time weaving
+    - Maven build system
+
 Note: This is WIP, subject to change at any time

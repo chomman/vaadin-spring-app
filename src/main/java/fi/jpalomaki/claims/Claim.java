@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import org.springframework.security.access.annotation.Secured;
 import fi.jpalomaki.claims.persistence.DomainObject;
+import static fi.jpalomaki.claims.security.BusinessFunctions.*;
 
 /**
  * Abstraction for a generic claim.
@@ -29,37 +31,23 @@ public final class Claim extends DomainObject {
     @NotNull
     @DecimalMin("0")
     private BigDecimal amount;
-
-    public Type getType() {
-        return type;
+    
+    @Override
+    @Secured(BF_CLAIM_CREATE)
+    public void persist() {
+        super.persist();
     }
-
-    public void setType(Type type) {
-        this.type = type;
+    
+    @Override
+    @Secured(BF_CLAIM_UPDATE)
+    public void update() {
+        super.update();
     }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    
+    @Override
+    @Secured(BF_CLAIM_DELETE)
+    public void remove() {
+        super.remove();
     }
     
     /**
@@ -77,6 +65,7 @@ public final class Claim extends DomainObject {
     /**
      * Find all {@link Claim}s.
      */
+    @Secured("BF_CLAIM_READ")
     public static List<Claim> findAll() {
         return entityManager().createQuery("FROM Claim", Claim.class).getResultList();
     }
@@ -88,6 +77,9 @@ public final class Claim extends DomainObject {
         
         FRAUD, LEGITIMATE;
         
+        /**
+         * Return {@link #values()} as a {@link Collection}.
+         */
         public static Collection<Type> collection() {
             return Arrays.asList(values());
         }

@@ -1,6 +1,7 @@
-package fi.jpalomaki.claims;
+package fi.jpalomaki.claims.ui;
 
 import com.vaadin.ui.*;
+import fi.jpalomaki.claims.Claim;
 
 /**
  * Button for triggering {@link Claim} creation.
@@ -21,21 +22,8 @@ public final class CreateClaimButton extends Button {
             @Override
             public void buttonClick(ClickEvent event) {
                 Window parent = getApplication().getMainWindow();
-                parent.addWindow(newCreateFormWindow());
+                parent.addWindow(EditClaimForm.newCreateClaimFormWindow());
             }
         });
-    }
-    
-    private Window newCreateFormWindow() {
-        Window window = new Window();
-        window.setModal(true);
-        window.setResizable(false);
-        window.setCaption("Create new claim");
-        window.addComponent(new CreateClaimForm());
-        VerticalLayout layout = (VerticalLayout)window.getContent();
-        layout.setMargin(true);
-        layout.setSpacing(true);
-        layout.setSizeUndefined();
-        return window;
     }
 }

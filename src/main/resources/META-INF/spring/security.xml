@@ -18,7 +18,7 @@
         <sec:authentication-provider> 
             <sec:password-encoder hash="plaintext" />
             <sec:user-service id="inMemoryUserDetailsService">
-                <sec:user name="user" password="s3cr3t" authorities="ROLE_USER,BF_BRICK_READ" />
+                <sec:user name="jukka" password="s3cr3t" authorities="ROLE_USER,BF_CLAIM_READ,BF_CLAIM_CREATE,BF_CLAIM_UPDATE,BF_CLAIM_DELETE" />
             </sec:user-service>
         </sec:authentication-provider> 
     </sec:authentication-manager>

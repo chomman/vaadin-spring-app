@@ -31,7 +31,7 @@
         <servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class>
         <init-param>
             <param-name>application</param-name>
-            <param-value>fi.jpalomaki.claims.ClaimsApp</param-value>
+            <param-value>fi.jpalomaki.claims.ui.ClaimsApp</param-value>
         </init-param>
     </servlet>
     

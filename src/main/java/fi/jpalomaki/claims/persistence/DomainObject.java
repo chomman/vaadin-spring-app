@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Configurable;
  * <br /><br />
  * {@link Configurable} to allow for the entityManager reference to be injected when an instance of this class is created.
  * <br /><br />
+ * {@link DomainObjectListener} populates the creation/modification attributes automatically.
+ * <br /><br />
  * {@link MappedSuperclass} makes subclasses (entities) inherit the fields in this class.
  * 
  * @author jpalomaki
@@ -84,6 +86,9 @@ public abstract class DomainObject {
         DomainObject merged = this.entityManager.merge(this);
         this.entityManager.flush();
         this.id = merged.getId();
+        this.version = merged.getVersion();
+        this.modificationDate = merged.getModificationDate();
+        this.modifiedBy = merged.getModifiedBy();
     }
     
     /**
@@ -121,7 +126,7 @@ public abstract class DomainObject {
      */
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder().append(id).toHashCode();
     }
 
     /**
@@ -129,7 +134,17 @@ public abstract class DomainObject {
      */
     @Override
     public boolean equals(Object object) {
-        return EqualsBuilder.reflectionEquals(this, object);
+        if (object == null) { 
+            return false;
+        }
+        if (object == this) {
+            return true;
+        }
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+        DomainObject other = (DomainObject)object;
+        return new EqualsBuilder().append(this.id, other.id).isEquals();
     }
 
     /**
