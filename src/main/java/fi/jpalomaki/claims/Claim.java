@@ -7,8 +7,8 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import org.springframework.security.access.annotation.Secured;
-import fi.jpalomaki.claims.persistence.DomainObject;
 import static fi.jpalomaki.claims.security.BusinessFunctions.*;
+import fi.jpalomaki.claims.persistence.DomainObject;
 
 /**
  * Abstraction for a generic claim.
