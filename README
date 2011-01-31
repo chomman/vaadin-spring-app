@@ -3,11 +3,12 @@ Claims (sample Vaadin-Spring web application)
 
     - Vaadin-powered UI
     - Spring-powered backend
-    - Spring security with HTTP digest auth
-    - Active record-style data access with JPA 2 + simple service layer
-    - AspectJ ITDs and compile-time weaving
     - Maven build with JRebel plugin
+    - Spring security with HTTP digest auth + simple permissions
+    - Active record-style data access with JPA 2 + simple service layer
+    - AspectJ ITDs and compile-time weaving + @Configurable
     
-    TODO: Paging, i18n, UI component hiding per user's authorities (declarative?)
+    TODO: Table item paging (via a container?), i18n (plugin to component rendering so that one could provide message
+    keys to setCaption() etc. ?), declarative UI component hiding per user's authorities (plugin to rendering system?).
 
-Note: This is WIP, subject to change at any time.
+Note: This is WIP, subject to change at any time. I'm just using this to learn Vaadin.
