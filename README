@@ -1,14 +1,25 @@
 
-Claims (sample Vaadin-Spring web application)
+Claims (sample Vaadin-Spring web app)
+
+Features:
 
     - Vaadin-powered UI
     - Spring-powered backend
     - Maven build with JRebel plugin
-    - Spring security with HTTP digest auth + simple permissions
+    - Spring security with HTTP digest auth + simple authorities
     - Active record-style data access with JPA 2 + simple service layer
-    - AspectJ ITDs and compile-time weaving + @Configurable
-    
-    TODO: Table item paging (via a container?), i18n (plugin to component rendering so that one could provide message
-    keys to setCaption() etc. ?), declarative UI component hiding per user's authorities (plugin to rendering system?).
+    - AspectJ compile-time weaving, @Configurable and some ITDs
+    - In-memory HSQLDB database
+
+TODO:
+
+    - Sample tests (JUnit, WebDriver)
+    - Table item paging (via JPA container?)
+    - Declarative UI component visibility per user's authorities (plugin to rendering system?)
+    - I18n (plugin to component rendering so that one could provide message keys to setCaption(...) etc. ?)  
+
+If you have Maven installed, run "mvn clean tomcat:run" and browse to http://localhost:8080/claims. Login with jukka/s3cr3t.
+
+You should also be able to import the project into SpringSource Tool Suite as-is, using EGit.
 
 Note: This is WIP, subject to change at any time. I'm just using this to learn Vaadin.
