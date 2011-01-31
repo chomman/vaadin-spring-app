@@ -21,6 +21,9 @@ public final class EditClaimForm extends BeanValidationForm<Claim> {
     
     private final Claim claim;
     
+    /**
+     * Construct a new {@link EditClaimForm} for the given {@link Claim}.
+     */
     public EditClaimForm(Claim claim) {
         super(Claim.class);
         this.claim = claim;
@@ -53,13 +56,9 @@ public final class EditClaimForm extends BeanValidationForm<Claim> {
     private Button newSaveButton() {
         return new Button("Save", new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
-                try {
-                    saveClaim();
-                    updateTable();
-                    closeWindow();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                saveClaim();
+                updateTable();
+                closeWindow();
             }
         });
     }
@@ -67,12 +66,8 @@ public final class EditClaimForm extends BeanValidationForm<Claim> {
     private Button newCancelButton() {
         Button button = new Button("Cancel", new Button.ClickListener() {
             public void buttonClick(ClickEvent event) {
-                try {
-                    discard();
-                    closeWindow();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                discard();
+                closeWindow();
             }
         });
         button.setStyleName(BaseTheme.BUTTON_LINK);
