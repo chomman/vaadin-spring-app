@@ -2,13 +2,12 @@
 Claims (sample Vaadin-Spring web application)
 
     - Vaadin-powered UI
-    - Simple service layer
     - Spring-powered backend
     - Spring security with HTTP digest auth
-    - Active record -style data access with JPA 2
+    - Active record-style data access with JPA 2 + simple service layer
     - AspectJ ITDs and compile-time weaving
     - Maven build with JRebel plugin
     
-    TODO: Localization
+    TODO: Paging, i18n, UI component hiding per user's authorities (declarative?)
 
-Note: This is WIP, subject to change at any time
+Note: This is WIP, subject to change at any time.
