@@ -17,6 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 public final class ClaimService {
     
     /**
+     * Remove the given claims in one go.
+     */
+    @Transactional
+    @Secured(BF_CLAIM_DELETE)
+    public void remove(Collection<Claim> claims) {
+        for (Claim claim : claims) {
+            claim.remove();
+        }
+    }
+    
+    /**
      * Merge the given claims into one and return the result.
      */
     @Transactional
@@ -25,10 +36,10 @@ public final class ClaimService {
         BigDecimal amount = BigDecimal.ZERO;
         for (Claim claim : claims) {
             amount = amount.add(claim.getAmount());
-            claim.remove();
         }
         Claim merged = Claim.of(Type.LEGITIMATE, "Merged claim", "Merged claim", amount);
         merged.persist();
+        remove(claims);
         return merged;
     }
 }

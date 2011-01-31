@@ -27,6 +27,9 @@ public final class ClaimsTable extends Table {
     @Autowired
     private ClaimService service;
     
+    /**
+     * Construct a new {@link ClaimsTable}.
+     */
     public ClaimsTable() {
         super();
         setupTable();
@@ -35,10 +38,14 @@ public final class ClaimsTable extends Table {
     }
 
     private void setupTable() {
+        setupColumns();
+        setWidth("75%");
         setPageLength(10);
         setSelectable(true);
         setMultiSelect(true);
-        setWidth("75%");
+    }
+    
+    private void setupColumns() {
         addContainerProperty("Id", Long.class, null);
         addContainerProperty("Version", Long.class, null);
         addContainerProperty("Type", Type.class, null);
@@ -52,7 +59,7 @@ public final class ClaimsTable extends Table {
         setVisibleColumns(new Object[] {"Id", "Version", "Type", "Summary", "Description", "Amount", "CreationDate", 
                 "CreatedBy", "ModificationDate", "ModifiedBy"});
     }
-    
+
     @SuppressWarnings("serial")
     private void addContextMenu() {
         addActionHandler(new Action.Handler() {
@@ -64,28 +71,42 @@ public final class ClaimsTable extends Table {
             
             
             @Override
-            @SuppressWarnings("unchecked")
             public void handleAction(Action action, Object sender, Object target) {
                 if (action == EDIT) {
                     getApplication().getMainWindow().addWindow(EditClaimForm.newEditClaimFormWindowFor((Claim)target));
                 }
                 if (action == MERGE) {
-                    System.out.println(getValue().getClass());
-                    Set<Claim> selectedClaims = (Set<Claim>)getValue();
-                    if (selectedClaims.size() > 1) {
-                        Claim merged = service.merge(selectedClaims);
-                        for (Claim selected : selectedClaims) {
+                    Collection<Claim> selection = getSelectedClaims();
+                    if (selection.size() > 1 && selection.contains(target)) {
+                        Claim merged = service.merge(selection);
+                        for (Claim selected : selection) {
                             removeItem(selected);
                         }
                         add(merged);
                     }
                 }
                 if (action == DELETE) {
-                    ((Claim)target).remove();
-                    removeItem(target);
+                    Collection<Claim> selection = getSelectedClaims();
+                    if (selection.size() > 1 && selection.contains(target)) {
+                        doDelete(selection);
+                    } else {
+                        doDelete(Collections.singleton((Claim)target));
+                    }
                 }
             }
+            
+            private void doDelete(Collection<Claim> claims) {
+                for (Claim claim : claims) {
+                    removeItem(claim);
+                }
+                service.remove(claims);
+            }
         });
+    }
+    
+    @SuppressWarnings("unchecked")
+    private Collection<Claim> getSelectedClaims() {
+        return (Collection<Claim>)getValue();
     }
     
     private void populateWithData() {
@@ -101,7 +122,7 @@ public final class ClaimsTable extends Table {
         addItem(row, claim);
     }
     
-    public void update(Claim claim) {
+    void update(Claim claim) {
         removeItem(claim);
         add(claim);
     }

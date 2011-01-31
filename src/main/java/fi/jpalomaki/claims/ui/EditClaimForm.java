@@ -1,16 +1,15 @@
 package fi.jpalomaki.claims.ui;
 
 import com.vaadin.ui.*;
-
-import java.math.BigDecimal;
 import java.util.Arrays;
+import java.math.BigDecimal;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.BaseTheme;
 import com.vaadin.addon.beanvalidation.BeanValidationForm;
-import fi.jpalomaki.claims.Claim;
 import fi.jpalomaki.claims.Claim.Type;
+import fi.jpalomaki.claims.Claim;
 
 /**
  * Form for editing a {@link Claim}.

@@ -12,8 +12,7 @@ import fi.jpalomaki.claims.Claim;
 public final class CreateClaimButton extends Button {    
     
     public CreateClaimButton() {
-        super();
-        setCaption("Create");
+        super("Create");
         addClickListener();
     }
     
